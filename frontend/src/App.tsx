@@ -1,13 +1,12 @@
 import './App.css';
 import PackingGuide from './TravelListForm';
 
-function App() {
-
+const App = (): JSX.Element => {
   return (
     <>
       <PackingGuide />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
