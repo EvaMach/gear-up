@@ -1,0 +1,84 @@
+{
+  "gear": [
+    {
+      "group": "Spaní a zavazadla",
+      "items": [
+        {
+          "name": "spacák",
+          "type": "outdoor",
+          "amount": 1
+        },
+        {
+          "name": "karimatka",
+          "type": "outdoor",
+          "amount": 1
+        },
+        {
+          "name": "podsedák",
+          "type": "outdoor",
+          "amount": 1
+        },
+        {
+          "name": "stan/tarp",
+          "type": "outdoor",
+          "amount": 1
+        },
+        {
+          "name": "trekové hole",
+          "type": "outdoor",
+          "amount": 1
+        },
+        {
+          "name": "krosna",
+          "type": "outdoor",
+          "amount": 1
+        },
+        {
+          "name": "pláštěnka na krosnu",
+          "type": "outdoor",
+          "amount": 1
+        },
+        {
+          "name": "nepromokový obal na spacák",
+          "type": "outdoor",
+          "amount": 1
+        },
+        {
+          "name": "nepromokový obal na oblečení",
+          "type": "outdoor",
+          "amount": 1
+        },
+        {
+          "name": "nepromokový obal na elektroniku",
+          "type": "outdoor",
+          "amount": 1
+        },
+        {
+          "name": "nepromokový obal na jídlo",
+          "type": "outdoor",
+          "amount": 1
+        },
+        {
+          "name": "složitelný batoh/tote bag",
+          "type": "all",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "group": "Oblečení",
+      "items": [
+        {
+          "name": "merino triko",
+          "type": "outdoor",
+          "amount": 1
+        },
+        {
+          "name": "bavlněné triko",
+          "type": "outdoor",
+          "amount": 1
+        }
+      ]
+    }
+  ]
+}
