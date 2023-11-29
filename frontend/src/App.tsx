@@ -5,9 +5,11 @@ import Header from './components/Header';
 const App = (): JSX.Element => {
   return (
     <>
-      <Header />
-      <div className="mx-20 flex flex-col justify-center">
-        <PackingGuide />
+      <div>
+        <Header />
+        <div className="mx-6 flex flex-col justify-center">
+          <PackingGuide />
+        </div>
       </div>
     </>
   );
