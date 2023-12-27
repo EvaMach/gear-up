@@ -1,11 +1,12 @@
-import tentImg from './img/tent.jpg';
-import hotelImg from './img/hotel.jpg';
 import './style.css';
 import Select from 'react-select';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Gear, GearList, Item, fetchGearOptions } from '../api/gear';
+import tentImg from './img/tent.jpg';
+import hotelImg from './img/hotel.jpg';
+import { Gear, GearList, fetchGearOptions } from '../api/gear';
 import GearItem from '../components/GearItem';
+import FormSectionHead from '../components/FormSectionHead';
 
 const PackingGuide = (): JSX.Element => {
   const [step, setStep] = useState(1);
@@ -18,13 +19,19 @@ const PackingGuide = (): JSX.Element => {
 
   useEffect(() => {
     if (gearList.status === 'success') {
-      setGearData([...gearList.data.map((gear: Gear) => ({ group: gear.group, items: gear.items.filter((item) => item.type === "outdoor") }))]);
+      setGearData([
+        ...gearList.data.map((gear: Gear) => ({
+          group: gear.group,
+          items: gear.items.filter((item) => item.type === 'outdoor'),
+        })),
+      ]);
     }
   }, [gearList.status]);
 
-
   const handleItemAdded = (item, data): void => {
-    const displayedItems = gearData.map((gear) => gear.items.map((item) => item.name)).flat();
+    const displayedItems = gearData
+      .map((gear) => gear.items.map((item) => item.name))
+      .flat();
     setIsAlreadyAdded(false);
     if (displayedItems.includes(item.value.name)) {
       setIsAlreadyAdded(true);
@@ -42,7 +49,10 @@ const PackingGuide = (): JSX.Element => {
   const handleItemRemove = (group: string, itemName: string): void => {
     const updatedData = gearData.map((gear) => {
       if (gear.group === group) {
-        return { ...gear, items: gear.items.filter((item) => itemName !== item.name) };
+        return {
+          ...gear,
+          items: gear.items.filter((item) => itemName !== item.name),
+        };
       }
       return gear;
     });
@@ -52,14 +62,14 @@ const PackingGuide = (): JSX.Element => {
   if (gearList.data) {
     const filteredData = gearList.data.map((gear) => ({
       group: gear.group,
-      items: gear.items
+      items: gear.items,
     }));
     return (
       <>
         <h1 className="mb-8">Sbal se na další výlet rychle a bez stresu!</h1>
         <form className="flex flex-col gap-2">
           <div className="flex flex-col gap-2 mb-2">
-            <h2>1. Základní info</h2>
+            <FormSectionHead count={1} title="Základní info" />
             <label className="flex flex-col">
               Na kolik dní:
               <input
@@ -111,18 +121,31 @@ const PackingGuide = (): JSX.Element => {
           )}
           {step === 2 && (
             <div className="flex flex-col gap-2">
-              {gearData.map((data) => (
+              {gearData.map((data, index) => (
                 <>
-                  <h2 key={data.group}>{data.group}</h2>
-                  {data.items
-                    .map((dataItem) => (
-                      <GearItem key={dataItem.name} group={data.group} name={dataItem.name} count={dataItem.amount} onRemove={handleItemRemove} />
-                    ))}
-                  <Select key={data.group + 'select'}
+                  <FormSectionHead count={index + 2} title={data.group} />
+                  {data.items.map((dataItem) => (
+                    <GearItem
+                      key={dataItem.name}
+                      group={data.group}
+                      name={dataItem.name}
+                      count={dataItem.amount}
+                      onRemove={handleItemRemove}
+                    />
+                  ))}
+                  <Select
+                    key={data.group + 'select'}
                     onChange={(item) => handleItemAdded(item, data)}
-                    options={filteredData.map((gear) => gear.items.map((item) => ({ value: item, label: item.name }))).flat()}
+                    options={filteredData
+                      .map((gear) =>
+                        gear.items.map((item) => ({
+                          value: item,
+                          label: item.name,
+                        }))
+                      )
+                      .flat()}
                   ></Select>
-                  {/* {isAlreadyAdded && <p>Gear už je na seznamu.</p>} */}
+                  {isAlreadyAdded && <p>Gear už je na seznamu.</p>}
                 </>
               ))}
             </div>
