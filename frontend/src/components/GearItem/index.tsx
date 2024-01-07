@@ -1,5 +1,5 @@
-// eslint-disable-next-line import/no-unresolved
-import BinIcon from './bin-icon.svg?react';
+import { BinIcon, ShopIcon } from '../../libs/icons/icons';
+import IconButton from '../IconButton';
 
 interface Props {
   name: string;
@@ -13,14 +13,18 @@ const GearItem = ({ group, name, count, onRemove }: Props): JSX.Element => {
     onRemove(group, name);
   };
   return (
-    <div className="flex">
+    <div className="flex gap-2">
       <div>{count}</div>
-      <div className="bg-slate-300 w-40 rounded px-2">{name}</div>
-      <button type="button" onClick={handleClick}>
-        <button>
-          <BinIcon />
-        </button>
-      </button>
+      <div className="flex items-center bg-blueLight w-40 h-10 rounded px-2">
+        {name}
+      </div>
+      <img src="" alt="" />
+      <IconButton onClick={handleClick}>
+        <BinIcon className="fill-textColor w-5 hover:fill-primary mr-4" />
+      </IconButton>
+      <IconButton onClick={handleClick}>
+        <ShopIcon className="fill-textColor w-5 hover:fill-accent" />
+      </IconButton>
     </div>
   );
 };
