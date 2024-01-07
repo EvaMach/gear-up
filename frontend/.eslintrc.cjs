@@ -7,12 +7,12 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:import/recommended',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs', 'tailwind.config.js'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'tailwind.config.js', 'vite.config.ts'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: './tsconfig.json'
+    project: './tsconfig.json',
   },
-  plugins: ['import', 'react-refresh','react-hooks', '@typescript-eslint', 'prettier'],
+  plugins: ['import', 'react-refresh', 'react-hooks', '@typescript-eslint', 'prettier'],
   rules: {
     "prettier/prettier": "error",
     'react-refresh/only-export-components': [
@@ -29,4 +29,4 @@ module.exports = {
       }
     }
   ]
-}
+};
