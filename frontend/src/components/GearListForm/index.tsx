@@ -4,11 +4,11 @@ import { Fragment, useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import tentImg from './img/tent.jpg';
 import hotelImg from './img/hotel.jpg';
-import { Gear, GearList, fetchGearOptions } from '../api/gear';
-import GearItem from '../components/GearItem';
-import FormSectionHead from '../components/FormSectionHead';
+import { Gear, GearList, fetchGearOptions } from '../../api/gear';
+import GearItem from '../GearItem';
+import FormSectionHead from '../FormSectionHead';
 
-const PackingGuide = (): JSX.Element => {
+const GearListForm = (): JSX.Element => {
   const [step, setStep] = useState(1);
   const gearList = useQuery({
     queryKey: ['gear'],
@@ -168,4 +168,4 @@ const PackingGuide = (): JSX.Element => {
   return <div>nothing</div>;
 };
 
-export default PackingGuide;
+export default GearListForm;

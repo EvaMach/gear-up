@@ -1,5 +1,5 @@
 import './App.css';
-import PackingGuide from './TravelListForm';
+import GearListForm from './components/GearListForm';
 import Header from './components/Header';
 
 const App = (): JSX.Element => {
@@ -8,7 +8,7 @@ const App = (): JSX.Element => {
       <div>
         <Header />
         <div className="mx-6 flex flex-col justify-center">
-          <PackingGuide />
+          <GearListForm />
         </div>
       </div>
     </>
