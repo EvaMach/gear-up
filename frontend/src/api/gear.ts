@@ -1,6 +1,6 @@
 const API_BASE_URL = 'http://localhost:4000';
 
-export interface Item {
+export interface GearItem {
   name: string;
   type: 'outdoor' | 'casual';
   amount: number;
@@ -10,7 +10,7 @@ export type GearList = Gear[];
 
 export interface Gear {
   group: string;
-  items: Item[];
+  items: GearItem[];
 }
 
 export const fetchGearOptions = async (): Promise<GearList> => {

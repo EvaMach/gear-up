@@ -1,4 +1,3 @@
-import './App.css';
 import GearListForm from './components/GearListForm';
 import Header from './components/Header';
 

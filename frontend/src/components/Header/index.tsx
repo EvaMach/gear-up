@@ -1,7 +1,9 @@
+import logo from './logo.svg';
+
 const Header = (): JSX.Element => {
   return (
-    <div className="flex justify-between align-middle m-6">
-      <div>Gear Up</div>
+    <div className="flex justify-center mt-6">
+      <img src={logo} alt="Mountain logo" />
     </div>
   );
 };

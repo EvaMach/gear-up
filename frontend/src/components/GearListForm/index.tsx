@@ -5,7 +5,6 @@ import { useQuery } from '@tanstack/react-query';
 import tentImg from './img/tent.jpg';
 import hotelImg from './img/hotel.jpg';
 import { Gear, GearList, fetchGearOptions } from '../../api/gear';
-import GearItem from '../GearItem';
 import FormSectionHead from '../FormSectionHead';
 
 const GearListForm = (): JSX.Element => {
@@ -15,7 +14,7 @@ const GearListForm = (): JSX.Element => {
     queryFn: fetchGearOptions,
   });
   const [gearData, setGearData] = useState<GearList>([]);
-  const [isAlreadyAdded, setIsAlreadyAdded] = useState(false);
+  const [itemAlreadyAdded, setItemAlreadyAdded] = useState(false);
 
   useEffect(() => {
     if (gearList.status === 'success') {
@@ -26,15 +25,16 @@ const GearListForm = (): JSX.Element => {
         })),
       ]);
     }
-  }, [gearList.status]);
+  }, [gearList.status, gearList.data]);
 
-  const handleItemAdded = (item, data): void => {
+  const handleItemAdded = (item, data: Gear): void => {
+    console.log(item, data);
     const displayedItems = gearData
       .map((gear) => gear.items.map((item) => item.name))
       .flat();
-    setIsAlreadyAdded(false);
+    setItemAlreadyAdded(false);
     if (displayedItems.includes(item.value.name)) {
-      setIsAlreadyAdded(true);
+      setItemAlreadyAdded(true);
       return;
     }
     const updatedData = gearData.map((gear) => {
@@ -46,7 +46,7 @@ const GearListForm = (): JSX.Element => {
     setGearData([...updatedData]);
   };
 
-  const handleItemRemove = (group: string, itemName: string): void => {
+  const handleItemRemoved = (group: string, itemName: string): void => {
     const updatedData = gearData.map((gear) => {
       if (gear.group === group) {
         return {
@@ -120,7 +120,7 @@ const GearListForm = (): JSX.Element => {
               type="button"
               onClick={(): void => setStep(2)}
             >
-              Pokračovat na návrh seznamu
+              Seznam ke sbalení
             </button>
           )}
           {step === 2 && (
@@ -134,12 +134,12 @@ const GearListForm = (): JSX.Element => {
                       group={data.group}
                       name={dataItem.name}
                       count={dataItem.amount}
-                      onRemove={handleItemRemove}
+                      onRemove={handleItemRemoved}
                     />
                   ))}
                   <Select
                     key={data.group + 'select'}
-                    onChange={(item) => handleItemAdded(item, data)}
+                    onChange={(item): void => handleItemAdded(item, data)}
                     options={filteredData
                       .map((gear) =>
                         gear.items.map((item) => ({
@@ -149,17 +149,11 @@ const GearListForm = (): JSX.Element => {
                       )
                       .flat()}
                   ></Select>
-                  {isAlreadyAdded && <p>Gear už je na seznamu.</p>}
+                  {itemAlreadyAdded && <p>Gear už je na seznamu.</p>}
                 </Fragment>
               ))}
             </div>
           )}
-          <button
-            className="h-10 px-6 font-semibold w-48 rounded-md bg-primary text-white"
-            type="submit"
-          >
-            Vytvořit seznam
-          </button>
         </form>
       </>
     );
