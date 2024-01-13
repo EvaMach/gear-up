@@ -11,6 +11,7 @@ export default {
         accent: '#147387',
         blueLight: '#cef1f8',
         bgColor: '#EFFFFE',
+        bgDark: "#d1eceb",
         textColor: '#0C1639',
       }
     },

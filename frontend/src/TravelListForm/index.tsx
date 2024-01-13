@@ -1,6 +1,6 @@
 import './style.css';
 import Select from 'react-select';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import tentImg from './img/tent.jpg';
 import hotelImg from './img/hotel.jpg';
@@ -115,14 +115,18 @@ const PackingGuide = (): JSX.Element => {
             </label>
           </div>
           {step === 1 && (
-            <button type="button" onClick={(): void => setStep(2)}>
-              Load more
+            <button
+              className="h-10 px-6 font-semibold w-48 rounded-md bg-primary text-white"
+              type="button"
+              onClick={(): void => setStep(2)}
+            >
+              Pokračovat na návrh seznamu
             </button>
           )}
           {step === 2 && (
             <div className="flex flex-col gap-2">
               {gearData.map((data, index) => (
-                <>
+                <Fragment key={index}>
                   <FormSectionHead count={index + 2} title={data.group} />
                   {data.items.map((dataItem) => (
                     <GearItem
@@ -146,7 +150,7 @@ const PackingGuide = (): JSX.Element => {
                       .flat()}
                   ></Select>
                   {isAlreadyAdded && <p>Gear už je na seznamu.</p>}
-                </>
+                </Fragment>
               ))}
             </div>
           )}

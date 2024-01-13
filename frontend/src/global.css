@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-bgColor text-textColor m-8;
+
   font-size: 14px;
 }
 
@@ -14,4 +14,17 @@ h1 {
 h2 {
   font-size: 15px;
   font-weight: 500;
+}
+
+input {
+  @apply bg-bgColor;
+
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
 }
