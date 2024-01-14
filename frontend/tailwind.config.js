@@ -14,6 +14,7 @@ export default {
         bgDark: "#d1eceb",
         textColor: '#0C1639',
         inputBg: '#c9e8ed',
+        success: '#58bf9866',
       }
     },
   },

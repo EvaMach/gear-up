@@ -1,4 +1,11 @@
-import { BinIcon, MinusIcon, PlusIcon, ShopIcon } from '../../libs/icons/icons';
+import {
+  BinIcon,
+  CheckedIcon,
+  MinusIcon,
+  PlusIcon,
+  ShopIcon,
+  UncheckedIcon,
+} from '../../libs/icons/icons';
 import IconButton from '../IconButton';
 import { useState } from 'react';
 
@@ -11,6 +18,7 @@ interface Props {
 
 const GearItem = ({ group, name, count, onRemove }: Props): JSX.Element => {
   const [itemCount, setItemCount] = useState(count);
+  const [checked, setChecked] = useState(false);
   const handleClick = (): void => {
     onRemove(group, name);
   };
@@ -39,8 +47,18 @@ const GearItem = ({ group, name, count, onRemove }: Props): JSX.Element => {
           </IconButton>
         </div>
       </div>
-      <div className="flex items-center bg-blueLight w-40 p-1 h-10 rounded px-2">
-        {name}
+      <div
+        className={`flex justify-between items-center w-40 p-1 h-10 rounded px-2 
+        ${checked ? 'bg-success' : 'bg-blueLight'}`}
+      >
+        <span className="ellipsis">{name}</span>
+        <IconButton onClick={(): void => setChecked(!checked)}>
+          {checked ? (
+            <CheckedIcon className="w-4" />
+          ) : (
+            <UncheckedIcon className="w-4" />
+          )}
+        </IconButton>
       </div>
       <img src="" alt="" />
       <IconButton onClick={handleClick}>
