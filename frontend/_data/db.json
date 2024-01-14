@@ -14,6 +14,16 @@
           "amount": 0
         },
         {
+          "name": "polštářek",
+          "type": "tent",
+          "amount": 0
+        },
+        {
+          "name": "špunty do uší",
+          "type": "all",
+          "amount": 0
+        },
+        {
           "name": "podsedák",
           "type": "tent",
           "amount": 0
@@ -24,13 +34,13 @@
           "amount": 0
         },
         {
-          "name": "trekové hole",
+          "name": "krosna",
           "type": "tent",
           "amount": 0
         },
         {
-          "name": "krosna",
-          "type": "tent",
+          "name": "kufr",
+          "type": "casual",
           "amount": 0
         },
         {
@@ -59,7 +69,12 @@
           "amount": 0
         },
         {
-          "name": "složitelný batoh/tote bag",
+          "name": "menší batoh/taška/kabelka",
+          "type": "all",
+          "amount": 0
+        },
+        {
+          "name": "taška na špinavé oblečení",
           "type": "all",
           "amount": 0
         }
@@ -71,32 +86,218 @@
         {
           "name": "merino triko",
           "type": "tent",
-          "amount": 0.3
+          "amount": 0.3,
+          "season": "all"
         },
         {
-          "name": "bavlněné triko",
+          "name": "triko/košile",
           "type": "hotel",
-          "amount": 0
+          "amount": 0.5,
+          "season": "all"
         },
         {
-          "name": "legíny",
+          "name": "fleece mikina",
+          "type": "tent",
+          "amount": 0,
+          "season": "all"
+        },
+        {
+          "name": "softshell bunda",
+          "type": "tent",
+          "amount": 0,
+          "season": "all"
+        },
+        {
+          "name": "svetr / mikina",
+          "type": "casual",
+          "amount": 0.2,
+          "season": "winter"
+        },
+        {
+          "name": "svetr / mikina",
+          "type": "casual",
+          "amount": 0,
+          "season": "summer"
+        },
+        {
+          "name": "bunda s membránou",
+          "type": "tent",
+          "amount": 0,
+          "season": "all"
+        },
+        {
+          "name": "péřovka",
+          "type": "tent",
+          "amount": 0,
+          "season": "winter"
+        },
+        {
+          "name": "bunda/kabát",
+          "type": "tent",
+          "amount": 0,
+          "season": "winter"
+        },
+        {
+          "name": "přezůvky",
+          "type": "casual",
+          "amount": 0,
+          "season": "all"
+        },
+        {
+          "name": "pláštěnka",
+          "type": "tent",
+          "amount": 0,
+          "season": "all"
+        },
+        {
+          "name": "softshell kalhoty",
+          "type": "tent",
+          "amount": 0,
+          "season": "all"
+        },
+        {
+          "name": "legíny/tepláky",
           "type": "all",
-          "amount": 0
+          "amount": 0,
+          "season": "all"
+        },
+        {
+          "name": "jeany",
+          "type": "casual",
+          "amount": 0.2,
+          "season": "winter"
+        },
+        {
+          "name": "jeany",
+          "type": "casual",
+          "amount": 0,
+          "season": "summer"
+        },
+        {
+          "name": "kraťasy",
+          "type": "casual",
+          "amount": 0.2,
+          "season": "all"
+        },
+        {
+          "name": "merino legíny",
+          "type": "tent",
+          "amount": 0,
+          "season": "winter"
+        },
+        {
+          "name": "nepromokové kalhoty",
+          "type": "tent",
+          "amount": 0,
+          "season": "winter"
+        },
+        {
+          "name": "spodní prádlo",
+          "type": "tent",
+          "amount": 1,
+          "season": "all"
+        },
+        {
+          "name": "ponožky",
+          "type": "casual",
+          "amount": 1,
+          "season": "all"
+        },
+        {
+          "name": "merino ponožky",
+          "type": "tent",
+          "amount": 0.5,
+          "season": "all"
+        },
+        {
+          "name": "pohorky",
+          "type": "tent",
+          "amount": 0,
+          "season": "all"
+        },
+        {
+          "name": "tenisky",
+          "type": "casual",
+          "amount": 0,
+          "season": "all"
+        },
+        {
+          "name": "čepice/čelenka",
+          "type": "all",
+          "amount": 0,
+          "season": "winter"
+        },
+        {
+          "name": "šála",
+          "type": "all",
+          "amount": 0,
+          "season": "winter"
+        },
+        {
+          "name": "nákrčník",
+          "type": "tent",
+          "amount": 0,
+          "season": "all"
+        },
+        {
+          "name": "rukavice",
+          "type": "all",
+          "amount": 0,
+          "season": "winter"
         },
         {
           "name": "sport. podprsenka",
-          "type": "all",
-          "amount": 0.3
+          "type": "tent",
+          "amount": 0.3,
+          "season": "all"
         },
         {
-          "name": "sport. kalhoty",
+          "name": "podprsenka",
           "type": "all",
-          "amount": 0
+          "amount": 0,
+          "season": "summer"
         },
         {
-          "name": "sport. kalhoty",
+          "name": "sluneční brýle",
           "type": "all",
-          "amount": 0
+          "amount": 0,
+          "season": "summer"
+        },
+        {
+          "name": "kšiltovka/klobouk",
+          "type": "all",
+          "amount": 0,
+          "season": "summer"
+        },
+        {
+          "name": "žabky/pantofle",
+          "type": "all",
+          "amount": 0,
+          "season": "all"
+        },
+        {
+          "name": "sandály",
+          "type": "all",
+          "amount": 0,
+          "season": "summer"
+        },
+        {
+          "name": "šaty/sukně",
+          "type": "all",
+          "amount": 0,
+          "season": "summer"
+        },
+        {
+          "name": "pyžamo",
+          "type": "all",
+          "amount": 0,
+          "season": "all"
+        },
+        {
+          "name": "ponožky na spaní",
+          "type": "tent",
+          "amount": 0,
+          "season": "all"
         }
       ]
     },
@@ -174,6 +375,16 @@
           "amount": 0
         },
         {
+          "name": "krém na opalování",
+          "type": "all",
+          "amount": 0
+        },
+        {
+          "name": "tělový krém",
+          "type": "all",
+          "amount": 0
+        },
+        {
           "name": "suchý šampon",
           "type": "all",
           "amount": 0
@@ -201,6 +412,96 @@
       ]
     },
     {
+      "group": "Lékárnička",
+      "items": [
+        {
+          "name": "ibalgin/paralen",
+          "type": "all",
+          "amount": 0
+        },
+        {
+          "name": "endiaron/imodium",
+          "type": "all",
+          "amount": 0
+        },
+        {
+          "name": "náplasti",
+          "type": "all",
+          "amount": 0
+        },
+        {
+          "name": "septolete/pastilky na krk",
+          "type": "all",
+          "amount": 0
+        },
+        {
+          "name": "betadine",
+          "type": "tent",
+          "amount": 0
+        },
+        {
+          "name": "repellent",
+          "type": "tent",
+          "amount": 0
+        }
+      ]
+    },
+    {
+      "group": "Jídlo a vaření",
+      "items": [
+        {
+          "name": "lahev na vodu/camelback",
+          "type": "tent",
+          "amount": 0
+        },
+        {
+          "name": "ešus",
+          "type": "tent",
+          "amount": 0
+        },
+        {
+          "name": "příbor",
+          "type": "tent",
+          "amount": 0
+        },
+        {
+          "name": "vařič",
+          "type": "tent",
+          "amount": 0
+        },
+        {
+          "name": "bomba/líh",
+          "type": "tent",
+          "amount": 0
+        },
+        {
+          "name": "jar + houbička",
+          "type": "tent",
+          "amount": 0
+        },
+        {
+          "name": "termoska",
+          "type": "tent",
+          "amount": 0
+        },
+        {
+          "name": "aeropress/věci na kafe",
+          "type": "tent",
+          "amount": 0
+        },
+        {
+          "name": "kapesní nůž",
+          "type": "all",
+          "amount": 0
+        },
+        {
+          "name": "placatka",
+          "type": "all",
+          "amount": 0
+        }
+      ]
+    },
+    {
       "group": "Elektronika",
       "items": [
         {
@@ -209,7 +510,82 @@
           "amount": 0
         },
         {
-          "name": "nabíječka",
+          "name": "nabíječka mobilu",
+          "type": "all",
+          "amount": 0
+        },
+        {
+          "name": "notebook",
+          "type": "all",
+          "amount": 0
+        },
+        {
+          "name": "zdroj notebooku",
+          "type": "all",
+          "amount": 0
+        },
+        {
+          "name": "čtečka",
+          "type": "all",
+          "amount": 0
+        },
+        {
+          "name": "powerbanka",
+          "type": "all",
+          "amount": 0
+        },
+        {
+          "name": "sluchátka",
+          "type": "all",
+          "amount": 0
+        },
+        {
+          "name": "čelovka",
+          "type": "tent",
+          "amount": 0
+        }
+      ]
+    },
+    {
+      "group": "Důležité",
+      "items": [
+        {
+          "name": "peněženka",
+          "type": "all",
+          "amount": 0
+        },
+        {
+          "name": "doklady",
+          "type": "all",
+          "amount": 0
+        },
+        {
+          "name": "zahraniční měna",
+          "type": "all",
+          "amount": 0
+        },
+        {
+          "name": "kopie dokladů",
+          "type": "all",
+          "amount": 0
+        },
+        {
+          "name": "cestovní pojištění",
+          "type": "all",
+          "amount": 0
+        }
+      ]
+    },
+    {
+      "group": "Další",
+      "items": [
+        {
+          "name": "tužka a papír",
+          "type": "all",
+          "amount": 0
+        },
+        {
+          "name": "rouška/respirátor",
           "type": "all",
           "amount": 0
         }

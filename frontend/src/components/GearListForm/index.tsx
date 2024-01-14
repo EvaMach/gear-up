@@ -1,4 +1,5 @@
-import Select from 'react-select';
+// eslint-disable-next-line import/named
+import Select, { SingleValue } from 'react-select';
 import { Fragment, useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Gear, GearItem, GearList, fetchGearOptions } from '../../api/gear';
@@ -16,10 +17,11 @@ const GearListForm = (): JSX.Element => {
     queryKey: ['gear'],
     queryFn: fetchGearOptions,
   });
-  const [gearData, setGearData] = useState<GearList>([]);
+  const [allGear, setAllGear] = useState<GearList>([]);
   const [groupWhereAlreaady, setGroupWhereAlready] = useState<string | null>(
     null
   );
+  const [filteredGear, setFilteredGear] = useState<GearList>([]);
   const [listVisible, setListVisible] = useState(false);
   const [tripDetails, setTripDetails] = useState<TripDetails>({
     stayLength: 3,
@@ -28,17 +30,20 @@ const GearListForm = (): JSX.Element => {
 
   useEffect(() => {
     if (gearList.status === 'success') {
-      setGearData([
-        ...gearList.data.map((gear: Gear) => ({
+      setAllGear(gearList.data);
+      setFilteredGear(
+        gearList.data.map((gear: Gear) => ({
           group: gear.group,
           items: gear.items
-            .filter((item) => item.type === tripDetails.type)
+            .filter(
+              (item) => item.type === tripDetails.type || item.type === 'all'
+            )
             .map((item) => {
               const amount = Math.round(tripDetails.stayLength * item.amount);
               return { ...item, amount };
             }),
-        })),
-      ]);
+        }))
+      );
     }
   }, [gearList.status, gearList.data, tripDetails]);
 
@@ -46,26 +51,25 @@ const GearListForm = (): JSX.Element => {
     item: SingleValue<SelectOption>,
     data: Gear
   ): void => {
-    console.log(data);
-    const displayedItems = gearData
+    const displayedItems = filteredGear
       .map((gear) => gear.items.map((gearItem) => gearItem.name))
       .flat();
     setGroupWhereAlready(null);
-    if (displayedItems.includes(item.value.name)) {
+    if (displayedItems.includes(item!.value.name)) {
       setGroupWhereAlready(data.group);
       return;
     }
-    const updatedData = gearData.map((gear) => {
+    const updatedData = filteredGear.map((gear) => {
       if (gear.group === data.group) {
-        return { ...gear, items: [...gear.items, item.value] };
+        return { ...gear, items: [...gear.items, item!.value] };
       }
       return gear;
     });
-    setGearData([...updatedData]);
+    setFilteredGear([...updatedData]);
   };
 
   const handleItemRemoved = (group: string, itemName: string): void => {
-    const updatedData = gearData.map((gear) => {
+    const updatedData = allGear.map((gear) => {
       if (gear.group === group) {
         return {
           ...gear,
@@ -74,7 +78,7 @@ const GearListForm = (): JSX.Element => {
       }
       return gear;
     });
-    setGearData([...updatedData]);
+    setAllGear([...updatedData]);
   };
 
   const handleSubmitDetails = (submittedValues: TripDetails): void => {
@@ -93,7 +97,7 @@ const GearListForm = (): JSX.Element => {
         <form className="flex flex-col gap-2">
           {listVisible && (
             <div className="flex flex-col gap-2">
-              {gearData.map((data, index) => (
+              {filteredGear.map((data, index) => (
                 <Fragment key={index}>
                   <FormSectionHead count={index + 2} title={data.group} />
                   {data.items.map((dataItem) => (
@@ -108,7 +112,7 @@ const GearListForm = (): JSX.Element => {
                   <Select
                     key={data.group + 'select'}
                     onChange={(item): void => handleItemAdded(item, data)}
-                    options={gearData
+                    options={allGear
                       .filter((gear) => gear.group === data.group)
                       .map((gear) =>
                         gear.items.map((item) => ({
