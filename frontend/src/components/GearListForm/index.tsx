@@ -31,11 +31,16 @@ const GearListForm = (): JSX.Element => {
       setGearData([
         ...gearList.data.map((gear: Gear) => ({
           group: gear.group,
-          items: gear.items.filter((item) => item.type === tripDetails.type),
+          items: gear.items
+            .filter((item) => item.type === tripDetails.type)
+            .map((item) => {
+              const amount = Math.round(tripDetails.stayLength * item.amount);
+              return { ...item, amount };
+            }),
         })),
       ]);
     }
-  }, [gearList.status, gearList.data, tripDetails.type]);
+  }, [gearList.status, gearList.data, tripDetails]);
 
   const handleItemAdded = (
     item: SingleValue<SelectOption>,
@@ -96,7 +101,7 @@ const GearListForm = (): JSX.Element => {
                       key={dataItem.name}
                       group={data.group}
                       name={dataItem.name}
-                      count={dataItem.amount}
+                      count={dataItem.amount === 0 ? 1 : dataItem.amount}
                       onRemove={handleItemRemoved}
                     />
                   ))}
