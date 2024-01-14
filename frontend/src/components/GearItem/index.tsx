@@ -47,19 +47,21 @@ const GearItem = ({ group, name, count, onRemove }: Props): JSX.Element => {
           </IconButton>
         </div>
       </div>
-      <div
-        className={`flex justify-between items-center w-40 p-1 h-10 rounded px-2 
+      <button
+        type="button"
+        onClick={(): void => setChecked(!checked)}
+        className={`flex justify-between items-center w-40 p-1 h-9 rounded px-2 
         ${checked ? 'bg-success' : 'bg-blueLight'}`}
       >
-        <span className="ellipsis">{name}</span>
-        <IconButton onClick={(): void => setChecked(!checked)}>
-          {checked ? (
-            <CheckedIcon className="w-4" />
-          ) : (
-            <UncheckedIcon className="w-4" />
-          )}
-        </IconButton>
-      </div>
+        <div className="text-left w-28 mr-1">
+          <p className="overflow-auto whitespace-nowrap">{name}</p>
+        </div>
+        {checked ? (
+          <CheckedIcon className="w-4" />
+        ) : (
+          <UncheckedIcon className="w-4" />
+        )}
+      </button>
       <img src="" alt="" />
       <IconButton onClick={handleClick}>
         <BinIcon className="fill-textColor w-5 hover:fill-primary mr-4" />
