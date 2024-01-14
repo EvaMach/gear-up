@@ -7,8 +7,13 @@ import FormSectionHead from '../FormSectionHead';
 import ListItem from '../ListItem';
 import TripDetailsForm, { TripDetails } from '../TripDetailsForm';
 
+interface OptionValue {
+  item: GearItem;
+  group: string;
+}
+
 interface SelectOption {
-  value: GearItem;
+  value: OptionValue;
   label: string;
 }
 
@@ -27,6 +32,7 @@ const GearListForm = (): JSX.Element => {
     stayLength: 3,
     type: 'tent',
   });
+  const [selectValue, setSelectValue] = useState('');
 
   useEffect(() => {
     if (gearList.status === 'success') {
@@ -47,21 +53,20 @@ const GearListForm = (): JSX.Element => {
     }
   }, [gearList.status, gearList.data, tripDetails]);
 
-  const handleItemAdded = (
-    item: SingleValue<SelectOption>,
-    data: Gear
-  ): void => {
+  const handleItemAdded = (selected: SingleValue<SelectOption>): void => {
+    if (selected === null) return;
+    const { value } = selected;
     const displayedItems = filteredGear
       .map((gear) => gear.items.map((gearItem) => gearItem.name))
       .flat();
     setGroupWhereAlready(null);
-    if (displayedItems.includes(item!.value.name)) {
-      setGroupWhereAlready(data.group);
+    if (displayedItems.includes(value.item.name)) {
+      setGroupWhereAlready(value.group);
       return;
     }
     const updatedData = filteredGear.map((gear) => {
-      if (gear.group === data.group) {
-        return { ...gear, items: [...gear.items, item!.value] };
+      if (gear.group === value.group) {
+        return { ...gear, items: [...gear.items, value.item] };
       }
       return gear;
     });
@@ -85,6 +90,10 @@ const GearListForm = (): JSX.Element => {
     setListVisible(true);
     setTripDetails(submittedValues);
   };
+
+  const createNewOption = (): JSX.Element => (
+    <button>Přidat {selectValue}</button>
+  );
 
   if (gearList.data) {
     return (
@@ -111,12 +120,17 @@ const GearListForm = (): JSX.Element => {
                   ))}
                   <Select
                     key={data.group + 'select'}
-                    onChange={(item): void => handleItemAdded(item, data)}
+                    onChange={handleItemAdded}
+                    noOptionsMessage={createNewOption}
+                    inputValue={selectValue}
+                    onInputChange={(inputValue): void =>
+                      setSelectValue(inputValue)
+                    }
                     options={allGear
                       .filter((gear) => gear.group === data.group)
                       .map((gear) =>
                         gear.items.map((item) => ({
-                          value: item,
+                          value: { item: item, group: data.group },
                           label: item.name,
                         }))
                       )
