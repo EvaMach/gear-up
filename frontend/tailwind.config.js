@@ -13,6 +13,7 @@ export default {
         bgColor: '#EFFFFE',
         bgDark: "#d1eceb",
         textColor: '#0C1639',
+        inputBg: '#c9e8ed',
       }
     },
   },

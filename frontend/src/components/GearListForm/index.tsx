@@ -1,20 +1,19 @@
-import './style.css';
 import Select from 'react-select';
 import { Fragment, useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import tentImg from './img/tent.jpg';
-import hotelImg from './img/hotel.jpg';
 import { Gear, GearList, fetchGearOptions } from '../../api/gear';
+import GearItem from '../GearItem';
 import FormSectionHead from '../FormSectionHead';
+import TripDetailsForm from '../TripDetailsForm';
 
 const GearListForm = (): JSX.Element => {
-  const [step, setStep] = useState(1);
   const gearList = useQuery({
     queryKey: ['gear'],
     queryFn: fetchGearOptions,
   });
   const [gearData, setGearData] = useState<GearList>([]);
   const [itemAlreadyAdded, setItemAlreadyAdded] = useState(false);
+  const [listVisible, setListVisible] = useState(false);
 
   useEffect(() => {
     if (gearList.status === 'success') {
@@ -66,64 +65,12 @@ const GearListForm = (): JSX.Element => {
     }));
     return (
       <>
-        <h1 className="mb-8">Sbal se na další výlet rychle a bez stresu!</h1>
+        <TripDetailsForm
+          onChangeDetails={(): void => setListVisible(false)}
+          onSubmitDetails={(): void => setListVisible(true)}
+        />
         <form className="flex flex-col gap-2">
-          <div className="flex flex-col gap-2 mb-2">
-            <FormSectionHead count={1} title="Základní info" />
-            <label className="flex flex-col">
-              Na kolik dní:
-              <input
-                className="p-1 bg-slate-300 rounded-md border-zinc-500"
-                type="number"
-                name="stayLength"
-              />
-            </label>
-            <label className="flex flex-col">
-              Tip výletu:
-              <div className="flex items-center gap-10">
-                <div>
-                  <input
-                    className="input-hidden"
-                    type="radio"
-                    name="tent"
-                    id="tent"
-                  />
-                  <label htmlFor="tent">
-                    <img
-                      className="w-80 cursor-pointer"
-                      src={tentImg}
-                      alt="camping"
-                    />
-                  </label>
-                </div>
-                <div>
-                  <input
-                    className="input-hidden"
-                    type="radio"
-                    name="hotel"
-                    id="hotel"
-                  />
-                  <label htmlFor="hotel">
-                    <img
-                      className="w-80 cursor-pointer"
-                      src={hotelImg}
-                      alt="hotel"
-                    />
-                  </label>
-                </div>
-              </div>
-            </label>
-          </div>
-          {step === 1 && (
-            <button
-              className="h-10 px-6 font-semibold w-48 rounded-md bg-primary text-white"
-              type="button"
-              onClick={(): void => setStep(2)}
-            >
-              Seznam ke sbalení
-            </button>
-          )}
-          {step === 2 && (
+          {listVisible && (
             <div className="flex flex-col gap-2">
               {gearData.map((data, index) => (
                 <Fragment key={index}>
