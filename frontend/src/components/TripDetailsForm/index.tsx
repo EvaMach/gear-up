@@ -5,11 +5,12 @@ import hotelImg from './img/hotel.jpg';
 import FormSectionHead from '../FormSectionHead';
 
 interface Props {
-  onSubmitDetails: () => void;
+  onSubmitDetails: (formValues: TripDetails) => void;
   onChangeDetails: () => void;
+  tripDetails: TripDetails;
 }
 
-interface FormValues {
+export interface TripDetails {
   stayLength: number;
   type: 'tent' | 'hotel';
 }
@@ -17,19 +18,16 @@ interface FormValues {
 const TripDetailsForm = ({
   onSubmitDetails,
   onChangeDetails,
+  tripDetails,
 }: Props): JSX.Element => {
-  const { register, handleSubmit, getValues } = useForm<FormValues>({
-    defaultValues: {
-      stayLength: 3,
-      type: 'tent',
-    },
+  const { register, handleSubmit, getValues } = useForm<TripDetails>({
+    defaultValues: tripDetails,
   });
   const [step, setStep] = useState('empty');
 
-  const onSubmit = (data: FormValues): void => {
-    console.log(data);
+  const onSubmit = (formValues: TripDetails): void => {
     setStep('filled');
-    onSubmitDetails();
+    onSubmitDetails(formValues);
   };
 
   const changeDetails = (): void => {

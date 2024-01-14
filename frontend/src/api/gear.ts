@@ -2,8 +2,12 @@ const API_BASE_URL = 'http://localhost:4000';
 
 export interface GearItem {
   name: string;
-  type: 'outdoor' | 'casual';
+  type: 'tent' | 'hotel';
   amount: number;
+}
+
+export interface PackedGearItem extends GearItem {
+  packed: boolean;
 }
 
 export type GearList = Gear[];

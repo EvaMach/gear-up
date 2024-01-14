@@ -5,57 +5,57 @@
       "items": [
         {
           "name": "spacák",
-          "type": "outdoor",
+          "type": "tent",
           "amount": 1
         },
         {
           "name": "karimatka",
-          "type": "outdoor",
+          "type": "tent",
           "amount": 1
         },
         {
           "name": "podsedák",
-          "type": "outdoor",
+          "type": "tent",
           "amount": 1
         },
         {
           "name": "stan/tarp",
-          "type": "outdoor",
+          "type": "tent",
           "amount": 1
         },
         {
           "name": "trekové hole",
-          "type": "outdoor",
+          "type": "tent",
           "amount": 1
         },
         {
           "name": "krosna",
-          "type": "outdoor",
+          "type": "tent",
           "amount": 1
         },
         {
           "name": "pláštěnka na krosnu",
-          "type": "outdoor",
+          "type": "tent",
           "amount": 1
         },
         {
-          "name": "nepromokový obal na spacák",
-          "type": "outdoor",
+          "name": "neprom. obal na spacák",
+          "type": "tent",
           "amount": 1
         },
         {
-          "name": "nepromokový obal na oblečení",
-          "type": "outdoor",
+          "name": "neprom. obal na oblečení",
+          "type": "tent",
           "amount": 1
         },
         {
-          "name": "nepromokový obal na elektroniku",
-          "type": "outdoor",
+          "name": "neprom. obal na elektroniku",
+          "type": "tent",
           "amount": 1
         },
         {
-          "name": "nepromokový obal na jídlo",
-          "type": "outdoor",
+          "name": "neprom. obal na jídlo",
+          "type": "tent",
           "amount": 1
         },
         {
@@ -70,12 +70,12 @@
       "items": [
         {
           "name": "merino triko",
-          "type": "outdoor",
+          "type": "tent",
           "amount": 0.3
         },
         {
           "name": "bavlněné triko",
-          "type": "casual",
+          "type": "hotel",
           "amount": 1
         },
         {

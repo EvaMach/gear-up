@@ -16,7 +16,7 @@ interface Props {
   onRemove: (group: string, item: string) => void;
 }
 
-const GearItem = ({ group, name, count, onRemove }: Props): JSX.Element => {
+const ListItem = ({ group, name, count, onRemove }: Props): JSX.Element => {
   const [itemCount, setItemCount] = useState(count);
   const [checked, setChecked] = useState(false);
   const handleClick = (): void => {
@@ -73,4 +73,4 @@ const GearItem = ({ group, name, count, onRemove }: Props): JSX.Element => {
   );
 };
 
-export default GearItem;
+export default ListItem;
