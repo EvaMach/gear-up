@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/named
 import Select, { SingleValue } from 'react-select';
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Gear, GearItem, GearList, fetchGearOptions } from '../../api/gear';
 import FormSectionHead from '../FormSectionHead';
@@ -132,9 +132,9 @@ const GearListForm = (): JSX.Element => {
         />
         <form className="flex flex-col gap-2">
           {listVisible && (
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 lg:flex-row">
               {filteredGear.map((data, index) => (
-                <Fragment key={index}>
+                <div className="flex flex-col gap-2" key={index}>
                   <FormSectionHead title={data.group} />
                   {data.items.map((dataItem) => (
                     <ListItem
@@ -168,7 +168,7 @@ const GearListForm = (): JSX.Element => {
                       Gear už je na seznamu.
                     </p>
                   )}
-                </Fragment>
+                </div>
               ))}
             </div>
           )}

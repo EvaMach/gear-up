@@ -3,15 +3,27 @@
 @tailwind utilities;
 
 body {
-  font-size: 14px;
+  font-size: 14.5px;
   @apply bg-bgColor;
+
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
 }
 
 h1 {
   font-size: 16px;
+
+  @media (min-width: 768px) {
+    font-size: 18px;
+  }
 }
 
 h2 {
   font-size: 15px;
   font-weight: 500;
+
+  @media (min-width: 768px) {
+    font-size: 17px;
+  }
 }

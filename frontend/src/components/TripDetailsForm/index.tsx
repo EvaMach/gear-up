@@ -38,10 +38,10 @@ const TripDetailsForm = ({
 
   return (
     <>
-      <FormSectionHead count={1} title="Základní info" />
+      <FormSectionHead title="Základní info" />
       {step === 'empty' ? (
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex flex-col gap-2 mb-2">
+          <div className="flex flex-col justify-center sm:items-center gap-2 mb-2">
             <label className="flex flex-col">
               Počet dní:
               <input
@@ -64,7 +64,7 @@ const TripDetailsForm = ({
                     {...register('type', { required: true })}
                   />
                   <img
-                    className="w-80 cursor-pointer ring-transparent peer-checked:ring-accent rounded-3xl ring-offset-2 ring-4"
+                    className="w-70 sm:w-40 md:w-52 cursor-pointer ring-transparent peer-checked:ring-accent rounded-3xl ring-offset-2 ring-4"
                     src={tentImg}
                     alt="camping"
                   />
@@ -79,7 +79,7 @@ const TripDetailsForm = ({
                       {...register('type', { required: true })}
                     />
                     <img
-                      className="w-80 cursor-pointer ring-transparent peer-checked:ring-accent ring-offset-2 ring-4 rounded-3xl"
+                      className="w-70 sm:w-40 md:w-52 cursor-pointer ring-transparent peer-checked:ring-accent ring-offset-2 ring-4 rounded-3xl"
                       src={hotelImg}
                       alt="hotel"
                     />
@@ -90,7 +90,7 @@ const TripDetailsForm = ({
           </div>
           <div className="flex justify-center">
             <button
-              className="h-10 px-6 font-semibold w-48 rounded-md bg-primary text-white my-3"
+              className="h-10 px-6 mt-8 font-semibold w-48 rounded-md bg-primary text-white my-3"
               type="submit"
             >
               Seznam ke sbalení
