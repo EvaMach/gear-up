@@ -32,7 +32,10 @@ const GearListForm = (): JSX.Element => {
     stayLength: 3,
     type: 'tent',
   });
-  const [selectValue, setSelectValue] = useState('');
+  const [selectValue, setSelectValue] = useState({
+    value: '',
+    group: '',
+  });
 
   useEffect(() => {
     if (gearList.status === 'success') {
@@ -53,14 +56,16 @@ const GearListForm = (): JSX.Element => {
     }
   }, [gearList.status, gearList.data, tripDetails]);
 
+  const isItemAlreadyOnList = (itemName: string): boolean =>
+    filteredGear.some((group) => {
+      return group.items.some((item) => item.name === itemName);
+    });
+
   const handleItemAdded = (selected: SingleValue<SelectOption>): void => {
     if (selected === null) return;
     const { value } = selected;
-    const displayedItems = filteredGear
-      .map((gear) => gear.items.map((gearItem) => gearItem.name))
-      .flat();
     setGroupWhereAlready(null);
-    if (displayedItems.includes(value.item.name)) {
+    if (isItemAlreadyOnList(value.item.name)) {
       setGroupWhereAlready(value.group);
       return;
     }
@@ -91,8 +96,30 @@ const GearListForm = (): JSX.Element => {
     setTripDetails(submittedValues);
   };
 
+  const handleNewItemCreated = (): void => {
+    if (isItemAlreadyOnList(selectValue.value)) {
+      setGroupWhereAlready(selectValue.group);
+      return;
+    }
+    const newItem: GearItem = {
+      name: selectValue.value,
+      type: tripDetails.type,
+      amount: 1,
+    };
+    const updatedData = filteredGear.map((gear) => {
+      if (gear.group === selectValue.group) {
+        return { ...gear, items: [...gear.items, newItem] };
+      }
+      return gear;
+    });
+    setFilteredGear([...updatedData]);
+    setSelectValue({ value: '', group: '' });
+  };
+
   const createNewOption = (): JSX.Element => (
-    <button>Přidat {selectValue}</button>
+    <button type="button" onClick={handleNewItemCreated}>
+      Přidat {selectValue.value}
+    </button>
   );
 
   if (gearList.data) {
@@ -108,7 +135,7 @@ const GearListForm = (): JSX.Element => {
             <div className="flex flex-col gap-2">
               {filteredGear.map((data, index) => (
                 <Fragment key={index}>
-                  <FormSectionHead count={index + 2} title={data.group} />
+                  <FormSectionHead title={data.group} />
                   {data.items.map((dataItem) => (
                     <ListItem
                       key={dataItem.name}
@@ -122,9 +149,9 @@ const GearListForm = (): JSX.Element => {
                     key={data.group + 'select'}
                     onChange={handleItemAdded}
                     noOptionsMessage={createNewOption}
-                    inputValue={selectValue}
+                    inputValue={selectValue.value}
                     onInputChange={(inputValue): void =>
-                      setSelectValue(inputValue)
+                      setSelectValue({ value: inputValue, group: data.group })
                     }
                     options={allGear
                       .filter((gear) => gear.group === data.group)

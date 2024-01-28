@@ -19,6 +19,7 @@ interface Props {
 const ListItem = ({ group, name, count, onRemove }: Props): JSX.Element => {
   const [itemCount, setItemCount] = useState(count);
   const [checked, setChecked] = useState(false);
+
   const handleClick = (): void => {
     onRemove(group, name);
   };
