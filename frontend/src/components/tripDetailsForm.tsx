@@ -3,6 +3,7 @@ import { useState } from 'react';
 import tentImg from '../assets/tent.jpg';
 import hotelImg from '../assets/hotel.jpg';
 import FormSectionHead from './formSectionHead';
+import ShoppingList from './shoppingList';
 
 interface Props {
   onSubmitDetails: (formValues: TripDetails) => void;
@@ -102,18 +103,21 @@ const TripDetailsForm = ({
           </div>
         </form>
       ) : (
-        <div className="relative shadow-sm rounded-lg p-2 bg-white mb-2 w-1/2">
-          <button
-            onClick={changeDetails}
-            className="absolute right-2 text-primary font-medium bg-primary/30 rounded-md p-1"
-          >
-            Změnit
-          </button>
-          <div className="font-medium">
-            Počet dní: {getValues('stayLength')}
+        <>
+          <div className="relative shadow-sm rounded-lg p-2 bg-white mb-2 w-full lg:w-1/2">
+            <button
+              onClick={changeDetails}
+              className="absolute right-2 text-primary font-medium bg-primary/30 rounded-md p-1"
+            >
+              Změnit
+            </button>
+            <div className="font-medium">
+              Počet dní: {getValues('stayLength')}
+            </div>
+            <div className="font-medium">Typ výletu: {tripTypeLabel}</div>
           </div>
-          <div className="font-medium">Typ výletu: {tripTypeLabel}</div>
-        </div>
+          <ShoppingList />
+        </>
       )}
     </>
   );

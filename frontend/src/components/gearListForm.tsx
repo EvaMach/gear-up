@@ -3,9 +3,9 @@ import Select, { SingleValue } from 'react-select';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Gear, GearItem, GearList, fetchGearOptions } from '../api/gear';
-import FormSectionHead from './formSectionHead';
 import ListItem from './listItem';
 import TripDetailsForm, { TripDetails } from './tripDetailsForm';
+import FormSectionHead from './formSectionHead';
 
 interface OptionValue {
   item: GearItem;
@@ -131,14 +131,11 @@ const GearListForm = (): JSX.Element => {
             onChangeDetails={(): void => setListVisible(false)}
             onSubmitDetails={handleSubmitDetails}
           />
-          <FormSectionHead count={2} title="Je třeba koupit" />
-          <div className="shadow-sm rounded-lg p-2 bg-white mb-2 w-1/2">
-            Zatím nemáš nic na seznamu.
-          </div>
         </div>
-        <form className="flex flex-col gap-2">
-          {listVisible && (
-            <div className="flex flex-col gap-2 lg:flex-row">
+        {listVisible && (
+          <form className="flex flex-col gap-2">
+            <FormSectionHead count={3} title="Balící seznam" />
+            <div className="flex flex-col gap-2 lg:flex-row lg:gap-14">
               {filteredGear.map((data, index) => (
                 <div className="flex flex-col gap-2" key={index}>
                   <h3 className="font-medium">{data.group}</h3>
@@ -177,8 +174,8 @@ const GearListForm = (): JSX.Element => {
                 </div>
               ))}
             </div>
-          )}
-        </form>
+          </form>
+        )}
       </>
     );
   }

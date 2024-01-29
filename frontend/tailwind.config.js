@@ -8,7 +8,7 @@ export default {
     extend: {
       colors: {
         primary: '#FF7655',
-        accent: '#5da0b3',
+        accent: '#498d9f',
         blueLight: '#4c9fad66',
         bgColor: '#EFFFFE',
         bgDark: "#d1eceb",
@@ -18,6 +18,7 @@ export default {
       },
       minWidth: {
         '5': '5rem',
+        '15': '15rem',
       },
     },
   },

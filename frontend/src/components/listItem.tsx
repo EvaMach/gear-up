@@ -51,11 +51,13 @@ const ListItem = ({ group, name, count, onRemove }: Props): JSX.Element => {
       <button
         type="button"
         onClick={(): void => setChecked(!checked)}
-        className={`flex lg:h-10 min-w-5 justify-between items-center w-1/2 p-1 h-9 rounded px-2 
+        className={`flex lg:h-10 min-w-5 lg:min-w-15 justify-between items-center w-1/2 p-1 h-9 rounded px-2 
         ${checked ? 'bg-success' : 'bg-blueLight'}`}
       >
         <div className="text-left w-10/12 mr-1">
-          <p className="overflow-auto whitespace-nowrap">{name}</p>
+          <p className="overflow-auto whitespace-nowrap lg:whitespace-normal">
+            {name}
+          </p>
         </div>
         {checked ? (
           <CheckedIcon className="w-4" />
