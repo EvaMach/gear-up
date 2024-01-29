@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import tentImg from './img/tent.jpg';
-import hotelImg from './img/hotel.jpg';
-import FormSectionHead from '../FormSectionHead';
+import tentImg from '../assets/tent.jpg';
+import hotelImg from '../assets/hotel.jpg';
+import FormSectionHead from './formSectionHead';
 
 interface Props {
   onSubmitDetails: (formValues: TripDetails) => void;

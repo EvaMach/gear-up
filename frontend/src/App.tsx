@@ -1,5 +1,5 @@
-import GearListForm from './components/GearListForm';
-import Header from './components/Header';
+import GearListForm from './components/gearListForm';
+import Header from './components/header';
 
 const App = (): JSX.Element => {
   return (

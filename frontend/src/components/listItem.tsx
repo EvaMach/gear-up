@@ -5,8 +5,8 @@ import {
   PlusIcon,
   ShopIcon,
   UncheckedIcon,
-} from '../../libs/icons/icons';
-import IconButton from '../IconButton';
+} from '../libs/icons/icons';
+import IconButton from './iconButton';
 import { useState } from 'react';
 
 interface Props {

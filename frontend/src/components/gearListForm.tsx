@@ -2,10 +2,10 @@
 import Select, { SingleValue } from 'react-select';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Gear, GearItem, GearList, fetchGearOptions } from '../../api/gear';
-import FormSectionHead from '../FormSectionHead';
-import ListItem from '../ListItem';
-import TripDetailsForm, { TripDetails } from '../TripDetailsForm';
+import { Gear, GearItem, GearList, fetchGearOptions } from '../api/gear';
+import FormSectionHead from './formSectionHead';
+import ListItem from './listItem';
+import TripDetailsForm, { TripDetails } from './tripDetailsForm';
 
 interface OptionValue {
   item: GearItem;
