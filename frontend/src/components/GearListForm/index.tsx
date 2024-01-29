@@ -125,17 +125,23 @@ const GearListForm = (): JSX.Element => {
   if (gearList.data) {
     return (
       <>
-        <TripDetailsForm
-          tripDetails={tripDetails}
-          onChangeDetails={(): void => setListVisible(false)}
-          onSubmitDetails={handleSubmitDetails}
-        />
+        <div className="flex flex-col items-center">
+          <TripDetailsForm
+            tripDetails={tripDetails}
+            onChangeDetails={(): void => setListVisible(false)}
+            onSubmitDetails={handleSubmitDetails}
+          />
+          <FormSectionHead count={2} title="Je třeba koupit" />
+          <div className="shadow-sm rounded-lg p-2 bg-white mb-2 w-1/2">
+            Zatím nemáš nic na seznamu.
+          </div>
+        </div>
         <form className="flex flex-col gap-2">
           {listVisible && (
             <div className="flex flex-col gap-2 lg:flex-row">
               {filteredGear.map((data, index) => (
                 <div className="flex flex-col gap-2" key={index}>
-                  <FormSectionHead title={data.group} />
+                  <h3 className="font-medium">{data.group}</h3>
                   {data.items.map((dataItem) => (
                     <ListItem
                       key={dataItem.name}

@@ -34,15 +34,19 @@ const TripDetailsForm = ({
     setStep('empty');
     onChangeDetails();
   };
+
   const tripTypeLabel = getValues('type') === 'tent' ? 'Pod stanem' : 'Hotel';
 
   return (
     <>
-      <FormSectionHead title="Základní info" />
+      <FormSectionHead count={1} title="Zadej základní informace  " />
       {step === 'empty' ? (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex flex-col justify-center sm:items-center gap-2 mb-2">
-            <label className="flex flex-col">
+        <form
+          className="flex flex-col justify-center sm:items-center gap-2 mb-2"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="flex flex-col gap-2">
+            <label className="flex gap-3 items-center font-medium">
               Počet dní:
               <input
                 defaultValue={3}
@@ -52,8 +56,8 @@ const TripDetailsForm = ({
                 {...register('stayLength', { required: true })}
               />
             </label>
-            <label className="flex flex-col">
-              <div className="mb-3">Tip výletu:</div>
+            <label className="flex flex-col font-medium">
+              <div className="mb-3">Typ výletu:</div>
               <div className="flex items-center gap-10">
                 <label htmlFor="tent">
                   <input
@@ -90,7 +94,7 @@ const TripDetailsForm = ({
           </div>
           <div className="flex justify-center">
             <button
-              className="h-10 px-6 mt-8 font-semibold w-48 rounded-md bg-primary text-white my-3"
+              className="h-10 px-6 mt-4 font-semibold w-48 rounded-md bg-primary text-white my-3"
               type="submit"
             >
               Seznam ke sbalení
@@ -98,7 +102,7 @@ const TripDetailsForm = ({
           </div>
         </form>
       ) : (
-        <div className="relative shadow-sm rounded-lg p-2 bg-white my-2">
+        <div className="relative shadow-sm rounded-lg p-2 bg-white mb-2 w-1/2">
           <button
             onClick={changeDetails}
             className="absolute right-2 text-primary font-medium bg-primary/30 rounded-md p-1"

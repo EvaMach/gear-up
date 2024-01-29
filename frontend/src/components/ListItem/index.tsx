@@ -51,8 +51,7 @@ const ListItem = ({ group, name, count, onRemove }: Props): JSX.Element => {
       <button
         type="button"
         onClick={(): void => setChecked(!checked)}
-        // style={{ minWidth: '20rem' }}
-        className={`flex lg:h-10 justify-between items-center w-1/2 p-1 h-9 rounded px-2 
+        className={`flex lg:h-10 min-w-5 justify-between items-center w-1/2 p-1 h-9 rounded px-2 
         ${checked ? 'bg-success' : 'bg-blueLight'}`}
       >
         <div className="text-left w-10/12 mr-1">
