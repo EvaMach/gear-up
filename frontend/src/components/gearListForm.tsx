@@ -117,8 +117,12 @@ const GearListForm = (): JSX.Element => {
   };
 
   const createNewOption = (): JSX.Element => (
-    <button type="button" onClick={handleNewItemCreated}>
-      Přidat {selectValue.value}
+    <button
+      className="hover:text-accent"
+      type="button"
+      onClick={handleNewItemCreated}
+    >
+      + {selectValue.value}
     </button>
   );
 
@@ -148,31 +152,39 @@ const GearListForm = (): JSX.Element => {
                       onRemove={handleItemRemoved}
                     />
                   ))}
-                  <Select
-                    key={data.group + 'select'}
-                    onChange={handleItemAdded}
-                    noOptionsMessage={createNewOption}
-                    inputValue={
-                      selectValue.group === data.group ? selectValue.value : ''
-                    }
-                    onInputChange={(inputValue): void =>
-                      setSelectValue({ value: inputValue, group: data.group })
-                    }
-                    options={allGear
-                      .filter((gear) => gear.group === data.group)
-                      .map((gear) =>
-                        gear.items.map((item) => ({
-                          value: { item: item, group: data.group },
-                          label: item.name,
-                        }))
-                      )
-                      .flat()}
-                  ></Select>
-                  {groupWhereAlreaady === data.group && (
-                    <p className="bg-primary/30 text-center rounded">
-                      Gear už je na seznamu.
-                    </p>
-                  )}
+                  <div className="w-full flex flex-col items-center">
+                    <Select
+                      menuPlacement="auto"
+                      className="gear-select"
+                      classNamePrefix={'gear-select'}
+                      key={data.group + 'select'}
+                      placeholder="Vybrat"
+                      onChange={handleItemAdded}
+                      noOptionsMessage={createNewOption}
+                      inputValue={
+                        selectValue.group === data.group
+                          ? selectValue.value
+                          : ''
+                      }
+                      onInputChange={(inputValue): void =>
+                        setSelectValue({ value: inputValue, group: data.group })
+                      }
+                      options={allGear
+                        .filter((gear) => gear.group === data.group)
+                        .map((gear) =>
+                          gear.items.map((item) => ({
+                            value: { item: item, group: data.group },
+                            label: item.name,
+                          }))
+                        )
+                        .flat()}
+                    ></Select>
+                    {groupWhereAlreaady === data.group && (
+                      <p className="bg-primary/30 text-center rounded w-1/2 lg:min-w-15">
+                        Gear už je na seznamu.
+                      </p>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

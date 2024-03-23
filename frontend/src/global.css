@@ -2,13 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+html * {
   font-size: 14.5px;
-  @apply bg-bgColor;
+  @apply text-textColor;
+  box-sizing: border-box;
 
   @media (min-width: 768px) {
     font-size: 16px;
   }
+}
+
+body {
+  @apply bg-bgColor;
 }
 
 h1 {
@@ -34,4 +39,29 @@ input[type=number]::-webkit-outer-spin-button {
   -moz-appearance: none;
   appearance: none;
   margin: 0;
+}
+
+.gear-select {
+  width: 50%;
+  left: 7px;
+
+  @media (min-width: 1024px) {
+    min-width: 15rem;
+  }
+
+  .gear-select__control {
+    @apply border-2;
+  }
+
+  .gear-select__control:hover,
+  .gear-select__control--is-focused {
+    @apply border-accent;
+    @apply border-2;
+    box-shadow: none;
+  }
+
+  .gear-select__option:hover,
+  .gear-select__option--is-focused {
+    @apply bg-blueLight;
+  }
 }
