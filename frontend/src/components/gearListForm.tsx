@@ -79,7 +79,7 @@ const GearListForm = (): JSX.Element => {
   };
 
   const handleItemRemoved = (group: string, itemName: string): void => {
-    const updatedData = allGear.map((gear) => {
+    const updatedData = filteredGear.map((gear) => {
       if (gear.group === group) {
         return {
           ...gear,
@@ -88,7 +88,7 @@ const GearListForm = (): JSX.Element => {
       }
       return gear;
     });
-    setAllGear([...updatedData]);
+    setFilteredGear([...updatedData]);
   };
 
   const handleSubmitDetails = (submittedValues: TripDetails): void => {
@@ -135,7 +135,7 @@ const GearListForm = (): JSX.Element => {
         {listVisible && (
           <form className="flex flex-col gap-2">
             <FormSectionHead count={3} title="Balící seznam" />
-            <div className="flex flex-col gap-2 lg:flex-row lg:gap-14">
+            <div className="flex max-h-[90vh] overflow-scroll bg-white rounded-lg shadow-sm p-2 flex-col gap-2 lg:flex-row lg:gap-14">
               {filteredGear.map((data, index) => (
                 <div className="flex flex-col gap-2" key={index}>
                   <h3 className="font-medium">{data.group}</h3>
@@ -152,7 +152,9 @@ const GearListForm = (): JSX.Element => {
                     key={data.group + 'select'}
                     onChange={handleItemAdded}
                     noOptionsMessage={createNewOption}
-                    inputValue={selectValue.value}
+                    inputValue={
+                      selectValue.group === data.group ? selectValue.value : ''
+                    }
                     onInputChange={(inputValue): void =>
                       setSelectValue({ value: inputValue, group: data.group })
                     }
