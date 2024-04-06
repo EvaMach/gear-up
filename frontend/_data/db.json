@@ -40,7 +40,7 @@
         },
         {
           "name": "kufr",
-          "type": "casual",
+          "type": "hotel",
           "amount": 0
         },
         {
@@ -90,7 +90,13 @@
           "season": "all"
         },
         {
-          "name": "triko/košile",
+          "name": "triko",
+          "type": "hotel",
+          "amount": 0.5,
+          "season": "all"
+        },
+        {
+          "name": "košile/halenka",
           "type": "hotel",
           "amount": 0.5,
           "season": "all"
@@ -108,16 +114,16 @@
           "season": "all"
         },
         {
-          "name": "svetr / mikina",
-          "type": "casual",
+          "name": "mikina",
+          "type": "tent",
           "amount": 0.2,
           "season": "winter"
         },
         {
-          "name": "svetr / mikina",
-          "type": "casual",
+          "name": "svetr",
+          "type": "hotel",
           "amount": 0,
-          "season": "summer"
+          "season": "winter"
         },
         {
           "name": "bunda s membránou",
@@ -139,7 +145,7 @@
         },
         {
           "name": "přezůvky",
-          "type": "casual",
+          "type": "hotel",
           "amount": 0,
           "season": "all"
         },
@@ -150,32 +156,32 @@
           "season": "all"
         },
         {
-          "name": "softshell kalhoty",
+          "name": "sportovní (softshell) kalhoty",
           "type": "tent",
           "amount": 0,
           "season": "all"
         },
         {
-          "name": "legíny/tepláky",
+          "name": "legíny",
+          "type": "all",
+          "amount": 0,
+          "season": "all"
+        },
+        {
+          "name": "tepláky",
           "type": "all",
           "amount": 0,
           "season": "all"
         },
         {
           "name": "jeany",
-          "type": "casual",
-          "amount": 0.2,
-          "season": "winter"
-        },
-        {
-          "name": "jeany",
-          "type": "casual",
+          "type": "hotel",
           "amount": 0,
           "season": "summer"
         },
         {
           "name": "kraťasy",
-          "type": "casual",
+          "type": "all",
           "amount": 0.2,
           "season": "all"
         },
@@ -199,7 +205,7 @@
         },
         {
           "name": "ponožky",
-          "type": "casual",
+          "type": "all",
           "amount": 1,
           "season": "all"
         },
@@ -217,7 +223,7 @@
         },
         {
           "name": "tenisky",
-          "type": "casual",
+          "type": "hotel",
           "amount": 0,
           "season": "all"
         },

@@ -25,7 +25,8 @@ module.exports = {
       files: ['*.tsx', '*.ts'],
       rules: {
         '@typescript-eslint/explicit-function-return-type': 'error',
-        "react/jsx-filename-extension": 'off'
+        "react/jsx-filename-extension": 'off',
+        '@typescript-eslint/np-explicit-any': 'off',
       }
     }
   ]
