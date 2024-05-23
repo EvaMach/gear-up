@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:4000';
+const API_BASE_URL = 'http://localhost:8000/api';
 
 export interface GearItem {
   name: string;
@@ -19,6 +19,6 @@ export interface Gear {
 
 export const fetchGearOptions = async (): Promise<GearList> => {
   const response = await fetch(`${API_BASE_URL}/gear`);
-  const data = await response.json();
-  return data;
+  const json = await response.json();
+  return json.data.documents;
 };

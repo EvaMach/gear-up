@@ -161,7 +161,9 @@ const GearListForm = (): JSX.Element => {
     </button>
   );
 
-  if (gearList.data) {
+  console.log(gearList);
+
+  if (gearList) {
     return (
       <>
         <div className="flex flex-col items-center">
@@ -174,7 +176,7 @@ const GearListForm = (): JSX.Element => {
         {listVisible && (
           <form className="flex flex-col gap-2">
             <FormSectionHead count={3} title="Balící seznam" />
-            <div className="flex overflow-x-scroll bg-white rounded-lg shadow-sm p-2 flex-col gap-2 lg:flex-row lg:gap-14">
+            <div className="flex lg:flex-row flex-col gap-2 lg:gap-14 bg-white shadow-sm p-2 rounded-lg overflow-x-scroll">
               {gearOnList.map((data, index) => (
                 <div className="flex flex-col gap-2" key={index}>
                   <h3 className="font-medium">{data.group}</h3>
@@ -187,7 +189,7 @@ const GearListForm = (): JSX.Element => {
                       onRemove={handleItemRemoved}
                     />
                   ))}
-                  <div className="w-full flex flex-col items-center">
+                  <div className="flex flex-col items-center w-full">
                     <Select
                       menuPlacement="auto"
                       className="gear-select"
@@ -226,7 +228,7 @@ const GearListForm = (): JSX.Element => {
                         .flat()}
                     ></Select>
                     {groupWhereAlreaady === data.group && (
-                      <p className="bg-primary/30 text-center rounded w-1/2 lg:min-w-15">
+                      <p className="bg-primary/30 rounded w-1/2 lg:min-w-15 text-center">
                         Gear už je na seznamu.
                       </p>
                     )}
