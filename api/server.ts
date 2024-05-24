@@ -12,9 +12,11 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 
 app.use(async (context) => {
-  const root = `${Deno.cwd()}/../`
+  const root = `${Deno.cwd()}/../`;
+  const filePath = context.request.url.pathname;
   const index = 'index.html';
-  await context.send({root, index})
+  await context.send({root, index});
+  await send(context, filePath, {root, index});
 });
 
 app.addEventListener("listen", ({ port }) => console.log(`listening on port: ${port}`) )
