@@ -34,7 +34,7 @@ export const getGear = async ({ response }: { response: any }) => {
     };
     options.body = JSON.stringify(query);
     const dataResponse = await fetch(URI, options);
-    const allGear = await dataResponse.json();
+    const {data: allGear} = await dataResponse.json();
 
     if (allGear) {
       response.status = 200;
