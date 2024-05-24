@@ -38,5 +38,5 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "gearup"
-          entrypoint: ".api/server.ts"
+          entrypoint: "api/server.ts"
           root: "dist"
