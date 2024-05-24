@@ -12,7 +12,7 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 
 app.use(async (context) => {
-  const root = '../';
+  const root = './';
   const filePath = context.request.url.pathname;
   const index = 'index.html';
   await send(context, filePath, {root, index});
