@@ -34,13 +34,14 @@ export const getGear = async ({ response }: { response: any }) => {
     };
     options.body = JSON.stringify(query);
     const dataResponse = await fetch(URI, options);
-    const {data: allGear} = await dataResponse.json();
+    const data = await dataResponse.json();
+    console.log(data);
 
-    if (allGear) {
+    if (data) {
       response.status = 200;
       response.body = {
         success: true,
-        data: allGear,
+        data: data,
       };
     } else {
       response.status = 500;
