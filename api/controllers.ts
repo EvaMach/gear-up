@@ -1,6 +1,6 @@
-import { config } from 'https://deno.land/x/dotenv@v3.2.2/mod.ts';
+import { load } from "https://deno.land/std@0.224.0/dotenv/mod.ts";
 
-const { DATA_API_KEY, APP_ID } = config();
+const { APP_ID, DATA_API_KEY } = await load();
 
 const BASE_URI = `https://data.mongodb-api.com/app/${APP_ID}/endpoint/data/v1/action`;
 

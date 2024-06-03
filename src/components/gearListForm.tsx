@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/named
 import Select, { SingleValue } from 'react-select';
+import CreatableSelect from 'react-select/creatable';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { GearItem, GearList, fetchGearOptions } from '../api/gear';
@@ -32,18 +33,6 @@ const GearListForm = (): JSX.Element => {
     stayLength: 3,
     type: 'tent',
   });
-  const [selectValue, setSelectValue] = useState<SelectOption>({
-    label: '',
-    value: {
-      item: {
-        name: '',
-        type: tripDetails.type,
-        amount: 0,
-      },
-      group: '',
-    },
-  });
-
   useEffect(() => {
     if (gearList.status === 'success') {
       const filter = (item: GearItem): boolean =>
@@ -129,21 +118,18 @@ const GearListForm = (): JSX.Element => {
     setTripDetails(submittedValues);
   };
 
-  const handleNewItemCreated = (): void => {
-    if (selectValue === null) {
-      return;
-    }
-    if (isItemAlreadyOnList(selectValue.label)) {
-      setGroupWhereAlready(selectValue.value.group);
-      return;
-    }
+  const handleNewItemCreated = (inputValue: string, dataGroup: string): void => {
+    // if (isItemAlreadyOnList(inputValue)) {
+    //   setGroupWhereAlready(selectValue.value.group);
+    //   return;
+    // }
     const newItem: GearItem = {
-      name: selectValue.label,
+      name: inputValue,
       type: tripDetails.type,
       amount: 1,
     };
     const updatedData = gearOnList.map((gear) => {
-      if (gear.group === selectValue.value.group) {
+      if (gear.group === dataGroup) {
         return { ...gear, items: [...gear.items, newItem] };
       }
       return gear;
@@ -151,17 +137,14 @@ const GearListForm = (): JSX.Element => {
     setGearOnList([...updatedData]);
   };
 
-  const createNewOption = (): JSX.Element => (
+  const createNewOption = (inputValue: string): JSX.Element => (
     <button
       className="hover:text-accent"
       type="button"
-      onClick={handleNewItemCreated}
     >
-      + {selectValue?.label}
+      + {inputValue}
     </button>
   );
-
-  console.log(gearList);
 
   if (gearList) {
     return (
@@ -190,33 +173,17 @@ const GearListForm = (): JSX.Element => {
                     />
                   ))}
                   <div className="flex flex-col items-center w-full">
-                    <Select
+                    <CreatableSelect
                       menuPlacement="auto"
                       className="gear-select"
                       classNamePrefix={'gear-select'}
                       key={data.group + 'select'}
+                      controlShouldRenderValue={false}
                       placeholder="Vybrat"
                       closeMenuOnSelect
-                      value={
-                        selectValue.value.group === data.group
-                          ? selectValue
-                          : null
-                      }
+                      onCreateOption={(inputValue) => handleNewItemCreated(inputValue, data.group)}
+                      formatCreateLabel={createNewOption}
                       onChange={handleItemAdded}
-                      noOptionsMessage={createNewOption}
-                      onInputChange={(inputValue): void =>
-                        setSelectValue({
-                          value: {
-                            group: data.group,
-                            item: {
-                              name: inputValue,
-                              type: tripDetails.type,
-                              amount: 1,
-                            },
-                          },
-                          label: inputValue,
-                        })
-                      }
                       options={selectOptions
                         .filter((gear) => gear.group === data.group)
                         .map((gear) =>
@@ -226,7 +193,7 @@ const GearListForm = (): JSX.Element => {
                           }))
                         )
                         .flat()}
-                    ></Select>
+                    />
                     {groupWhereAlreaady === data.group && (
                       <p className="bg-primary/30 rounded w-1/2 lg:min-w-15 text-center">
                         Gear už je na seznamu.
