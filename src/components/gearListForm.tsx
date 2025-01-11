@@ -159,9 +159,9 @@ const GearListForm = (): JSX.Element => {
         {listVisible && (
           <form className="flex flex-col gap-2">
             <FormSectionHead count={3} title="Balící seznam" />
-            <div className="flex lg:flex-row flex-col gap-2 lg:gap-14 bg-white shadow-sm p-2 rounded-lg overflow-x-scroll">
+            <div className="flex lg:flex-row max-w-full overflox-auto max-h-screen/4 flex-col gap-2 lg:gap-8 p-2 rounded-lg overflow-x-scroll">
               {gearOnList.map((data, index) => (
-                <div className="flex flex-col gap-2" key={index}>
+                <div className="flex max-h-screen min-w-fit overflow-y-auto flex-col gap-2 bg-white p-4 rounded-lg" key={index}>
                   <h3 className="font-medium">{data.group}</h3>
                   {data.items.map((dataItem) => (
                     <ListItem

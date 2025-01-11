@@ -41,54 +41,43 @@ const ListItem = ({ group, name, count, onRemove }: Props): JSX.Element => {
   return (
     <div className="flex gap-2 justify-center">
       <div className="flex items-center gap-0.5">
+        <div className='p-2'>{itemCount}</div>
         <IconButton
-          className="bg-bgDark p-1 h-7 aspect-square rounded-md flex items-center justify-center"
+          className="bg-bgDark p-1 h-6 aspect-square rounded-full flex items-center justify-center"
+          onClick={(): void => changeItemCount('plus')}
+        >
+          <PlusIcon className="fill-textColor w-2" />
+        </IconButton>
+        <IconButton
+          className="bg-bgDark p-1 h-6 aspect-square rounded-full flex items-center justify-center"
           onClick={(): void => changeItemCount('minus')}
         >
           <MinusIcon className="fill-textColor w-2" />
         </IconButton>
-        <input
-          className="bg-bgDark rounded-md h-7 aspect-square text-center"
-          type="number"
-          value={itemCount}
-          onChange={(e): void =>
-            setItemCount(parseInt(e.target.value.slice(0, 2)))
-          }
-        ></input>
-        <div className="flex flex-col">
-          <IconButton
-            className="bg-bgDark p-1 h-7 aspect-square rounded-md flex items-center justify-center"
-            onClick={(): void => changeItemCount('plus')}
-          >
-            <PlusIcon className="fill-textColor w-2" />
-          </IconButton>
-        </div>
       </div>
       <button
         type="button"
         onClick={(): void => setChecked(!checked)}
-        className={`flex lg:h-10 min-w-5 lg:min-w-15 justify-between items-center w-1/2 p-1 h-9 rounded px-2 
-        ${checked ? 'bg-success' : 'bg-blueLight'}`}
+        className="grid grid-cols-[2rem_minmax(5rem,_1fr)_2rem] border-2 lg:h-10 min-w-5 lg:min-w-15 justify-between items-center w-1/2 p-1 h-9 min-h-min rounded-lg px-2"
       >
-        <div className="text-left w-10/12 mr-1">
-          <p className="overflow-auto whitespace-nowrap lg:whitespace-normal">
-            {name}
-          </p>
-        </div>
         {checked ? (
           <CheckedIcon className="w-4" />
         ) : (
           <UncheckedIcon className="w-4" />
         )}
+        <div className="text-left">
+          <p className="overflow-auto whitespace-nowrap lg:whitespace-normal">
+            {name}
+          </p>
+        </div>
+        <IconButton onClick={removeItem}>
+          <BinIcon className="fill-gray-300 w-4 hover:fill-primary" />
+        </IconButton>
       </button>
-      <img src="" alt="" />
-      <IconButton onClick={removeItem}>
-        <BinIcon className="fill-textColor w-5 hover:fill-primary mr-4" />
-      </IconButton>
       <IconButton onClick={removeItem}>
         <ShopIcon className="fill-textColor w-5 hover:fill-accent" />
       </IconButton>
-    </div>
+    </div >
   );
 };
 
