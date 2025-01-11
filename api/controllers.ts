@@ -2,7 +2,7 @@ import { load } from "https://deno.land/std@0.224.0/dotenv/mod.ts";
 
 const { APP_ID, DATA_API_KEY } = await load();
 
-const BASE_URI = `https://data.mongodb-api.com/app/${APP_ID}/endpoint/data/v1/action`;
+const BASE_URI = `https://eu-central-1.aws.data.mongodb-api.com/app/${APP_ID}/endpoint/data/v1/action`;
 
 const DATA_SOURCE = "Cluster0";
 const DATABASE = "gearup_db";
@@ -18,13 +18,30 @@ const options = {
 };
 
 interface GearItem {
-  _id: {$oid: string};
+  _id: { $oid: string; };
   name: string;
   type: 'tent' | 'hotel' | 'all';
   amount: number;
 }
 
-export const getGear = async ({ response }: { response: any }) => {
+interface SuccessResponse<T> {
+  success: true;
+  data: {
+    documents: T;
+  };
+}
+
+interface ErrorResponse {
+  success: false;
+  msg: string;
+}
+
+interface ApiResponse<T> {
+  status: number;
+  body: SuccessResponse<T> | ErrorResponse;
+}
+
+export const getGear = async ({ response }: { response: ApiResponse<GearItem[]>; }) => {
   try {
     const URI = `${BASE_URI}/find`;
     const query = {
