@@ -1,4 +1,4 @@
-import GearListForm from './components/gearListForm';
+import { Outlet } from 'react-router-dom';
 import Header from './components/header';
 
 const App = (): JSX.Element => {
@@ -7,7 +7,7 @@ const App = (): JSX.Element => {
       <div>
         <Header />
         <div className="mx-6 flex flex-col justify-center">
-          <GearListForm />
+          <Outlet />
         </div>
       </div>
     </>
