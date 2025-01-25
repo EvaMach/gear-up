@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import tentImg from '../assets/tent.jpg';
 import hotelImg from '../assets/hotel.jpg';
 import FormSectionHead from './formSectionHead';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export interface TripDetails {
   stayLength: number;

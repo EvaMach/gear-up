@@ -1,5 +1,5 @@
 import { fetchGearOptions, GearItem, GearList } from "../api/gear";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import { TripDetails } from "./tripDetailsForm";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
