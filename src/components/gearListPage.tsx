@@ -1,5 +1,5 @@
 import { fetchGearOptions, GearItem, GearList } from "../api/gear";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation } from "react-router";
 import { TripDetails } from "./tripDetailsForm";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
@@ -19,9 +19,6 @@ interface SelectOption {
 
 const GearListPage = (): JSX.Element => {
   const location = useLocation();
-  const navigate = useNavigate();
-  const [isNavigating, setIsNavigating] = useState(false);
-
   const tripDetails = location.state as TripDetails;
 
   const { isPending, data: gearList, isError } = useQuery({
@@ -138,7 +135,6 @@ const GearListPage = (): JSX.Element => {
   };
 
   return (
-
     <>
       <TripDetailsBoard details={tripDetails} />
       <GearListForm
