@@ -4,6 +4,6 @@ import { getGear } from "./controllers.ts";
 const router = new Router();
 
 router
-  .get("/api/gear", getGear)
+  .get("/api/gear", getGear);
 
 export default router;

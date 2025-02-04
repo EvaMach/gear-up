@@ -25,8 +25,8 @@ const ListItem = ({ group, name, count, onRemove }: Props): JSX.Element => {
   };
 
   const changeItemCount = (operation?: 'plus' | 'minus'): void => {
-    if (itemCount === 0 && operation === 'minus') {
-      return;
+    if (itemCount === 1 && operation === 'minus') {
+      onRemove(group, name);
     }
     if (itemCount === 99 && operation === 'plus') {
       return;

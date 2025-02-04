@@ -1,4 +1,6 @@
 import { load } from "https://deno.land/std@0.224.0/dotenv/mod.ts";
+import type { RouterContext } from "https://deno.land/x/oak@v16.0.0/mod.ts";
+
 
 const { APP_ID, DATA_API_KEY } = await load();
 
@@ -41,13 +43,19 @@ interface ApiResponse<T> {
   body: SuccessResponse<T> | ErrorResponse;
 }
 
-export const getGear = async ({ response }: { response: ApiResponse<GearItem[]>; }) => {
+export const getGear = async (context: RouterContext) => {
+  const { response, request } = context;
   try {
+
+    const url = request.url;
+    const type = url.searchParams.get('type');
+
     const URI = `${BASE_URI}/find`;
     const query = {
       collection: COLLECTION,
       database: DATABASE,
-      dataSource: DATA_SOURCE
+      dataSource: DATA_SOURCE,
+      filter: type ? { "type": { $in: [type, "all"] } } : {},
     };
     options.body = JSON.stringify(query);
     const dataResponse = await fetch(URI, options);

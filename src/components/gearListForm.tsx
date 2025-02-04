@@ -1,6 +1,6 @@
 import { SingleValue } from 'react-select';
 import { useState } from 'react';
-import { GearItem, GearList } from '../api/gear';
+import { GearItem, GearList, GroupedGearList } from '../api/gear';
 import FormSectionHead from './formSectionHead';
 import CreatableSelect from 'react-select/creatable';
 import ListItem from './listItem';
@@ -16,7 +16,7 @@ interface SelectOption {
 }
 
 interface Props {
-  gear: GearList;
+  gear: GroupedGearList;
   onItemRemoved: (group: string, itemName: string) => void;
   onItemAdded: (value: SingleValue<SelectOption>) => void;
   onItemCreated: (value: string, group: string) => void;
@@ -27,10 +27,10 @@ const GearListForm = ({ gear, onItemRemoved, onItemAdded, selectOptions, onItemC
   const [groupWhereAlreaady, setGroupWhereAlready] = useState<string | null>(
     null
   );
-  const isItemAlreadyOnList = (itemName: string): boolean =>
-    gear.some((group) => {
-      return group.items.some((item) => item.name === itemName);
-    });
+  // const isItemAlreadyOnList = (itemName: string): boolean =>
+  //   gear.some((group) => {
+  //     return group.items.some((item) => item.name === itemName);
+  //   });
 
   const createNewOption = (inputValue: string): JSX.Element => (
     <button
@@ -45,13 +45,13 @@ const GearListForm = ({ gear, onItemRemoved, onItemAdded, selectOptions, onItemC
     <form className="flex flex-col gap-2">
       <FormSectionHead count={3} title="Balící seznam" />
       <div className="flex lg:flex-row max-w-full overflox-auto max-h-screen/4 flex-col gap-2 lg:gap-8 p-2 rounded-lg overflow-x-scroll">
-        {gear.map((data, index) => (
+        {Object.keys(gear).map((group, index) => (
           <div className="flex max-h-screen min-w-fit overflow-y-auto flex-col gap-2 bg-white p-4 rounded-lg" key={index}>
-            <h3 className="font-medium">{data.group}</h3>
-            {data.items.map((dataItem) => (
+            <h3 className="font-medium">{group}</h3>
+            {gear[group].map((dataItem) => (
               <ListItem
                 key={dataItem.name}
-                group={data.group}
+                group={group}
                 name={dataItem.name}
                 count={dataItem.amount === 0 ? 1 : dataItem.amount}
                 onRemove={onItemRemoved}
@@ -62,24 +62,19 @@ const GearListForm = ({ gear, onItemRemoved, onItemAdded, selectOptions, onItemC
                 menuPlacement="auto"
                 className="gear-select"
                 classNamePrefix={'gear-select'}
-                key={data.group + 'select'}
+                key={group + 'select'}
                 controlShouldRenderValue={false}
                 placeholder="Vybrat"
                 closeMenuOnSelect
-                onCreateOption={(inputValue) => onItemCreated(inputValue, data.group)}
+                onCreateOption={(inputValue) => onItemCreated(inputValue, group)}
                 formatCreateLabel={createNewOption}
                 onChange={onItemAdded}
-                options={selectOptions
-                  .filter((gear) => gear.group === data.group)
-                  .map((gear) =>
-                    gear.items.map((item) => ({
-                      value: { item: item, group: data.group },
-                      label: item.name,
-                    }))
-                  )
-                  .flat()}
+                options={gear[group].map((item) => ({
+                  value: { item: item, group: group },
+                  label: item.name,
+                }))}
               />
-              {groupWhereAlreaady === data.group && (
+              {groupWhereAlreaady === group && (
                 <p className="bg-primary/30 rounded w-1/2 lg:min-w-15 text-center">
                   Gear už je na seznamu.
                 </p>

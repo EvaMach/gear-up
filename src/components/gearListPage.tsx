@@ -1,4 +1,4 @@
-import { fetchGearOptions, GearItem, GearList } from "../api/gear";
+import { fetchGearOptions, GearItem, GearList, GroupedGearList } from "../api/gear";
 import { useLocation } from "react-router";
 import { TripDetails } from "./tripDetailsForm";
 import { useQuery } from "@tanstack/react-query";
@@ -22,33 +22,28 @@ const GearListPage = (): JSX.Element => {
   const tripDetails = location.state as TripDetails;
 
   const { isPending, data: gearList, isError } = useQuery({
-    queryKey: ['gear'],
-    queryFn: fetchGearOptions,
+    queryKey: ['gear', tripDetails.type],
+    queryFn: ({ queryKey }) => {
+      const [, type] = queryKey;
+      return fetchGearOptions(type);
+    },
   });
 
-  const [gearOnList, setGearOnList] = useState<GearList>([]);
+  const [groupedGearList, setGroupedGearList] = useState<GroupedGearList>({});
   const [selectOptions, setSelectOptions] = useState<GearList>([]);
 
   useEffect(() => {
-    if (!gearList) return;
-    const filter = (item: GearItem): boolean =>
-      item.type === tripDetails.type || item.type === 'all';
-
-    const buildGearData = (
-      filterFunction: (item: GearItem) => boolean
-    ): GearList => {
-      return gearList.map((gear) => ({
-        group: gear.group,
-        items: gear.items.filter(filterFunction).map((item) => {
-          const amount = Math.round(tripDetails.stayLength * item.amount);
-          return { ...item, amount };
-        }),
-      }));
-    };
-
-    setGearOnList(buildGearData((item) => filter(item)));
-    setSelectOptions(buildGearData((item) => !filter(item)));
-
+    if (gearList === undefined) {
+      return;
+    }
+    const groupedList = gearList.reduce((acc: { [key: string]: GearList; }, item) => {
+      if (acc[item.group] === undefined) {
+        acc[item.group] = [];
+      }
+      acc[item.group].push(item);
+      return acc;
+    }, {});
+    setGroupedGearList(groupedList);
   }, [gearList]);
 
 
@@ -62,33 +57,33 @@ const GearListPage = (): JSX.Element => {
 
 
   const handleItemRemoved = (group: string, itemName: string): void => {
-    const updatedData = gearOnList.map((gear) => {
-      if (gear.group === group) {
-        return {
-          ...gear,
-          items: gear.items.filter((item) => itemName !== item.name),
-        };
-      }
-      return gear;
-    });
-    setGearOnList([...updatedData]);
+    // const updatedData = groupedGearList.map((gear) => {
+    //   if (gear.group === group) {
+    //     return {
+    //       ...gear,
+    //       items: gear.items.filter((item) => itemName !== item.name),
+    //     };
+    //   }
+    //   return gear;
+    // });
+    // setGroupedGearList([...updatedData]);
 
-    const updatedSelectOptions = selectOptions.map((option) => {
-      if (option.group === group) {
-        const removedItem = gearOnList
-          .find((gear) => gear.group === group)
-          ?.items.find((item) => item.name === itemName);
-        if (removedItem) {
-          return {
-            ...option,
-            items: [...option.items, removedItem],
-          };
-        }
-      }
-      return option;
-    });
+    // const updatedSelectOptions = selectOptions.map((option) => {
+    //   if (option.group === group) {
+    //     const removedItem = groupedGearList
+    //       .find((gear) => gear.group === group)
+    //       ?.items.find((item) => item.name === itemName);
+    //     if (removedItem) {
+    //       return {
+    //         ...option,
+    //         items: [...option.items, removedItem],
+    //       };
+    //     }
+    //   }
+    //   return option;
+    // });
 
-    setSelectOptions([...updatedSelectOptions]);
+    // setSelectOptions([...updatedSelectOptions]);
   };
 
   const handleNewItemCreated = (inputValue: string, dataGroup: string): void => {
@@ -96,49 +91,49 @@ const GearListPage = (): JSX.Element => {
     //   setGroupWhereAlready(selectValue.value.group);
     //   return;
     // }
-    const newItem: GearItem = {
-      name: inputValue,
-      type: tripDetails.type,
-      amount: 1,
-    };
-    const updatedData = gearOnList.map((gear) => {
-      if (gear.group === dataGroup) {
-        return { ...gear, items: [...gear.items, newItem] };
-      }
-      return gear;
-    });
-    setGearOnList([...updatedData]);
+    // const newItem: GearItem = {
+    //   name: inputValue,
+    //   type: tripDetails.type,
+    //   amount: 1,
+    // };
+    // const updatedData = groupedGearList.map((gear) => {
+    //   if (gear.group === dataGroup) {
+    //     return { ...gear, items: [...gear.items, newItem] };
+    //   }
+    //   return gear;
+    // });
+    // setGroupedGearList([...updatedData]);
   };
 
 
   const handleItemAdded = (selectedItem: SingleValue<SelectOption>): void => {
-    if (selectedItem === null) return;
-    const { value } = selectedItem;
-    const updatedList = gearOnList.map((gear) => {
-      if (gear.group === value.group) {
-        return { ...gear, items: [...gear.items, value.item] };
-      }
-      return gear;
-    });
-    setGearOnList([...updatedList]);
+    // if (selectedItem === null) return;
+    // const { value } = selectedItem;
+    // const updatedList = groupedGearList.map((gear) => {
+    //   if (gear.group === value.group) {
+    //     return { ...gear, items: [...gear.items, value.item] };
+    //   }
+    //   return gear;
+    // });
+    // setGroupedGearList([...updatedList]);
 
-    const updatedSelectOptions = selectOptions.map((gear) => {
-      if (gear.group === value.group) {
-        return {
-          ...gear,
-          items: gear.items.filter((item) => item.name !== value.item.name),
-        };
-      }
-      return gear;
-    });
-    setSelectOptions(updatedSelectOptions);
+    // const updatedSelectOptions = selectOptions.map((gear) => {
+    //   if (gear.group === value.group) {
+    //     return {
+    //       ...gear,
+    //       items: gear.items.filter((item) => item.name !== value.item.name),
+    //     };
+    //   }
+    //   return gear;
+    // });
+    // setSelectOptions(updatedSelectOptions);
   };
 
   return (
     <>
       <TripDetailsBoard details={tripDetails} />
       <GearListForm
-        gear={gearOnList}
+        gear={groupedGearList}
         onItemRemoved={handleItemRemoved}
         onItemAdded={handleItemAdded}
         selectOptions={selectOptions}
