@@ -1,4 +1,4 @@
-import { fetchGearOptions, GearItem, GearList, GroupedGearList } from "../api/gear";
+import { fetchGearList, GearItem, GearList, GroupedGearList } from "../api/gear";
 import { useLocation } from "react-router";
 import { TripDetails } from "./tripDetailsForm";
 import { useQuery } from "@tanstack/react-query";
@@ -25,7 +25,7 @@ const GearListPage = (): JSX.Element => {
     queryKey: ['gear', tripDetails.type],
     queryFn: ({ queryKey }) => {
       const [, type] = queryKey;
-      return fetchGearOptions(type);
+      return fetchGearList(type);
     },
   });
 

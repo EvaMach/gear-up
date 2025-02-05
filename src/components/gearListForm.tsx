@@ -1,9 +1,10 @@
 import { SingleValue } from 'react-select';
-import { useState } from 'react';
-import { GearItem, GearList, GroupedGearList } from '../api/gear';
+import { useCallback, useState } from 'react';
+import { fetchGearOptions, GearItem, GearList, GroupedGearList } from '../api/gear';
 import FormSectionHead from './formSectionHead';
-import CreatableSelect from 'react-select/creatable';
+import { debounce } from "lodash";
 import ListItem from './listItem';
+import AsyncCreatableSelect from 'react-select/async-creatable';
 
 interface OptionValue {
   item: GearItem;
@@ -32,6 +33,28 @@ const GearListForm = ({ gear, onItemRemoved, onItemAdded, selectOptions, onItemC
   //     return group.items.some((item) => item.name === itemName);
   //   });
 
+  const fetchOptions = async (inputValue: string) => {
+    try {
+      const gearOptions = await fetchGearOptions(inputValue);
+      return (gearOptions.map(
+        (item) => ({ value: { item: item, group: item.type }, label: item.name, })));
+    } catch (error) {
+      console.error("Error fetching options:", error);
+      return [];
+    }
+  };
+
+  const debouncedLoadOptions = useCallback(
+    debounce(async (inputValue, callback) => {
+      if (!inputValue) {
+        return callback([]);
+      }
+      const gearOptions = await fetchOptions(inputValue);
+      callback(gearOptions);
+    }, 500),
+    []
+  );
+
   const createNewOption = (inputValue: string): JSX.Element => (
     <button
       className="hover:text-accent"
@@ -58,7 +81,7 @@ const GearListForm = ({ gear, onItemRemoved, onItemAdded, selectOptions, onItemC
               />
             ))}
             <div className="flex flex-col items-center w-full">
-              <CreatableSelect
+              <AsyncCreatableSelect
                 menuPlacement="auto"
                 className="gear-select"
                 classNamePrefix={'gear-select'}
@@ -69,10 +92,7 @@ const GearListForm = ({ gear, onItemRemoved, onItemAdded, selectOptions, onItemC
                 onCreateOption={(inputValue) => onItemCreated(inputValue, group)}
                 formatCreateLabel={createNewOption}
                 onChange={onItemAdded}
-                options={gear[group].map((item) => ({
-                  value: { item: item, group: group },
-                  label: item.name,
-                }))}
+                loadOptions={debouncedLoadOptions}
               />
               {groupWhereAlreaady === group && (
                 <p className="bg-primary/30 rounded w-1/2 lg:min-w-15 text-center">

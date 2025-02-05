@@ -17,8 +17,17 @@ export interface GroupedGearList {
   [group: string]: GearList;
 }
 
-export const fetchGearOptions = async (type: string): Promise<GearList> => {
+export const fetchGearList = async (type: string): Promise<GearList> => {
   const response = await fetch(`${API_BASE_URL}/gear?type=${type}`);
   const json = await response.json();
-  return json.data.documents;
+  return json.data;
 };
+
+export const fetchGearOptions = async (input: string): Promise<GearList> => {
+  const response = await fetch(`${API_BASE_URL}/options?q=${input}`);
+  console.log(response);
+  const json = await response.json();
+  return json.data;
+}
+
+
